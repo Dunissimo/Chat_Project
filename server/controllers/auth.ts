@@ -1,4 +1,3 @@
-import createHttpError from "http-errors";
 import { AuthService } from "../services/auth";
 // require("express-async-errors");
 
@@ -9,7 +8,7 @@ export class AuthController {
     const oldUser = await authService.findUser(dto.name);
 
     if (oldUser.rows.length > 0) {
-      throw createHttpError(401, "Пользователь уже зарегестрирован");
+      throw new Error("Пользователь уже зарегестрирован");
     }
 
     return authService.createUser(dto);

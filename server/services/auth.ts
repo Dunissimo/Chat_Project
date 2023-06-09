@@ -1,7 +1,6 @@
 import { compareSync, genSaltSync, hashSync } from "bcryptjs";
 import { pool as db } from "../db";
 import { QueryConfig } from "pg";
-import createHttpError from "http-errors";
 
 export class AuthService {
   async createUser(dto: any) {
