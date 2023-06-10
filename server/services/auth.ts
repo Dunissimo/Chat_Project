@@ -36,9 +36,9 @@ export class AuthService {
       values: [name, passwordHash, email, role || "user"],
     };
 
-    await db.query(query);
+    const user = await db.query(query);
 
-    return;
+    return { user, message: "Пользователь зарегистрирован" };
   }
 
   async findUser(name: string) {
@@ -64,14 +64,14 @@ export class AuthService {
       throw new CustomError(404, "Неправильный пароль");
     }
 
-    return { name: user.rows[0].name };
+    return { user: user.rows[0] };
   }
 
-  async login(name: string) {
-    const token = generateJWT(name);
-
+  async login(name: string, password: string) {
     return {
-      access_token: token,
+      user: this.validateUser(name, password),
+      access_token: generateJWT(name),
+      message: "Пользователь вошел в систему",
     };
   }
 }
