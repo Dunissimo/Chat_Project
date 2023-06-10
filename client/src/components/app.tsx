@@ -1,26 +1,14 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import PrivateRoute from "./private-route";
 import Main from "../pages/main";
 import Login from "../pages/login";
-
-const YES: FC = () => {
-  return <div>YES</div>;
-};
-
-interface IProps {
-  setUser: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { getCookie } from "typescript-cookie";
 
 const App: FC = () => {
-  const [user, setUser] = useState(false);
-
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<PrivateRoute auth={false} element={<Main />} />}
-      />
+      <Route path="/" element={<PrivateRoute element={<Main />} />} />
       <Route path="/login" element={<Login />} />
       {/* <Route
         path="/admin"

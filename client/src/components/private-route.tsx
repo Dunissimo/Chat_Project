@@ -1,20 +1,20 @@
 import { FC, ReactElement, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getCookie } from "typescript-cookie";
 
 interface IProps {
   element: ReactElement;
-  auth: boolean;
 }
 
-const PrivateRoute: FC<IProps> = ({ auth, element: Element }) => {
+const PrivateRoute: FC<IProps> = ({ element: Element }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (!auth) {
-      navigate("/login", { replace: true, state: { from: location } });
+    if (!getCookie("user-token")) {
+      navigate("/login", { state: { from: location } });
     }
-  }, [auth]);
+  }, []);
 
   return Element;
 };
