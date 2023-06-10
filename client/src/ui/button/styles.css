@@ -1,5 +1,5 @@
 .button-ui {
-  @apply px-6 py-2 border border-transparent rounded-md transition-all active:scale-90;
+  @apply select-none px-6 py-2 border border-transparent rounded-md transition-all active:scale-90;
 }
 
 .button-ui.standard {
