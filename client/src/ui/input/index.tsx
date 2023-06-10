@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { IBaseProps } from "../../utils/interfaces";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Stack from "../stack";
 
 import "./styles.css";
@@ -41,12 +40,12 @@ const PasswordInput: FC<IProps> = ({ className, style, otherProps }) => {
       />
       <div
         onClick={clickHandler}
-        className="cursor-pointer absolute top-[15%] right-4"
+        className="h-full cursor-pointer absolute right-4 flex items-center"
       >
         {visibility ? (
-          <VisibilityIcon color="info" />
+          <AiFillEye color="blue" size={"1.75em"} />
         ) : (
-          <VisibilityOffIcon color="info" />
+          <AiFillEyeInvisible color="blue" size={"1.75em"} />
         )}
       </div>
     </Stack>

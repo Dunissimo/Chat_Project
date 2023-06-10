@@ -1,10 +1,11 @@
-import { Dispatch, FC, FormEventHandler } from "react";
+import { Dispatch, FC, FormEventHandler, useState } from "react";
 import Button from "../ui/button";
 import Container from "../ui/container";
 import Input from "../ui/input";
 import { useMutation } from "@tanstack/react-query";
 import { registerDto } from "../utils/interfaces";
 import AuthApi from "../api/auth";
+import { AxiosError } from "axios";
 
 interface IProps {
   setMode: Dispatch<React.SetStateAction<"login" | "signup">>;
@@ -12,8 +13,19 @@ interface IProps {
 
 // TODO: устранить копирование функционала (две формы), следовать принципу DRY!
 const SignupForm: FC<IProps> = ({ setMode }) => {
-  const mutation = useMutation((newUser: registerDto) =>
-    AuthApi.register(newUser)
+  const [error, setError] = useState<Error | null>(null);
+
+  const mutation = useMutation(
+    (newUser: registerDto) => AuthApi.register(newUser),
+    {
+      onSuccess() {
+        setMode("login");
+      },
+      onError(error) {
+        const err = error as AxiosError<{ message: string }>;
+        setError(new Error(err?.response?.data?.message));
+      },
+    }
   );
 
   const submitHandler: FormEventHandler<HTMLFormElement> = (e) => {
@@ -29,8 +41,7 @@ const SignupForm: FC<IProps> = ({ setMode }) => {
 
     mutation.mutate(fields as registerDto);
 
-    setMode("login");
-    e.currentTarget.reset();
+    error || e.currentTarget.reset();
   };
 
   return (
@@ -46,7 +57,7 @@ const SignupForm: FC<IProps> = ({ setMode }) => {
         className="w-1/3 mx-auto flex flex-col gap-4 items-center"
       >
         <Input
-          className="text-black"
+          className={`text-black ${error ? "error" : ""}`}
           otherProps={{
             autoComplete: "off",
             type: "text",
@@ -56,7 +67,7 @@ const SignupForm: FC<IProps> = ({ setMode }) => {
           }}
         />
         <Input
-          className=" text-black"
+          className={`text-black ${error ? "error" : ""}`}
           otherProps={{
             type: "password",
             name: "password",
@@ -65,13 +76,17 @@ const SignupForm: FC<IProps> = ({ setMode }) => {
           }}
         />
         <Input
-          className=" text-black"
+          className={`text-black ${error ? "error" : ""}`}
           otherProps={{
             type: "email",
             name: "email",
             placeholder: "Почта",
           }}
         />
+        {error && (
+          <p className="text-center text-red-600 font-bold">{error.message}</p>
+        )}
+
         <Button otherProps={{ type: "submit" }} variant="outline">
           Зарегистрироваться
         </Button>
