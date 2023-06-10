@@ -30,7 +30,6 @@ export class AuthService {
       );
     }
 
-    // нужно найти пользователя в бд, проверить пароль, и если все ок, то вернуть name
     const query: QueryConfig = {
       name: "create-user",
       text: 'INSERT INTO public."User" (name, password, email, role) VALUES($1, $2, $3, $4);',

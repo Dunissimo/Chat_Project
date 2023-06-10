@@ -1,6 +1,5 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import { AuthController } from "../controllers/auth";
-import { CustomError } from "../utils/custom-error";
 
 export const router = express.Router();
 const authController = new AuthController();
