@@ -1,0 +1,6 @@
+.input-ui {
+  @apply w-full outline-none bg-white px-6 py-2 rounded-[5px] transition-all hover:bg-gray-200;
+}
+.input-ui:focus {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}

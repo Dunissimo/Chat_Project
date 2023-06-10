@@ -1,0 +1,15 @@
+.button-ui {
+  @apply px-6 py-2 border border-transparent rounded-md transition-all active:scale-90;
+}
+
+.button-ui.standard {
+  @apply hover:border-white;
+}
+
+.button-ui.outline {
+  @apply outline-none border border-white hover:bg-white hover:text-black;
+}
+
+.button-ui.contained {
+  @apply text-black bg-white hover:text-white hover:bg-transparent border border-white;
+}
