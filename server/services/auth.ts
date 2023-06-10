@@ -12,33 +12,15 @@ export class AuthService {
     const salt = genSaltSync(7);
     const passwordHash = hashSync(password, salt);
 
-    // TODO: сделать норм валидацию
-    if (
-      name.length < 2 ||
-      !/^[a-zA-Zа-яА-Я]+([-_]?[a-zA-Zа-яА-Я0-9]+){0,2}$/.test(name)
-    ) {
-      throw new CustomError(
-        401,
-        "Логин слишком короткий или содержит недопустимые символы"
-      );
-    }
-
-    if (password.length < 5) {
-      throw new CustomError(
-        401,
-        "Пароль слишком короткий, минимальная длина равна пяти"
-      );
-    }
-
     const query: QueryConfig = {
       name: "create-user",
       text: 'INSERT INTO public."User" (name, password, email, role) VALUES($1, $2, $3, $4);',
       values: [name, passwordHash, email, role || "user"],
     };
 
-    const user = await db.query(query);
+    await db.query(query);
 
-    return { user, message: "Пользователь зарегистрирован" };
+    return { message: "Пользователь зарегистрирован" };
   }
 
   async findUser(name: string) {
@@ -54,22 +36,24 @@ export class AuthService {
   async validateUser(name: string, password: string) {
     const user = await this.findUser(name);
 
-    if (user.rows.length < 1) {
-      throw new CustomError(404, "Пользователь не найден");
+    if (user.rowCount < 1) {
+      return false;
+      // throw new CustomError(404, "Пользователь не найден");
     }
 
     const isCorrectPass = compareSync(password, user.rows[0].password);
 
     if (!isCorrectPass) {
-      throw new CustomError(404, "Неправильный пароль");
+      return false;
+      // throw new CustomError(404, "Неправильный пароль");
     }
 
-    return { user: user.rows[0] };
+    return true;
+    // return { user: user.rows[0] };
   }
 
-  async login(name: string, password: string) {
+  async login(name: string) {
     return {
-      user: this.validateUser(name, password),
       access_token: generateJWT(name),
       message: "Пользователь вошел в систему",
     };

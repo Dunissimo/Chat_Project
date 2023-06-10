@@ -6,9 +6,10 @@ const authController = new AuthController();
 
 router.post("/auth/register/", async (req, res, next) => {
   try {
-    const user = await authController.register(req.body);
+    const response = await authController.register(req.body);
+    console.log(response);
 
-    res.json(user);
+    res.json(response);
   } catch (error) {
     next(error);
   }
@@ -16,9 +17,9 @@ router.post("/auth/register/", async (req, res, next) => {
 
 router.post("/auth/login/", async (req, res, next) => {
   try {
-    const token = await authController.login(req.body);
+    const response = await authController.login(req.body);
 
-    res.json(token);
+    res.json(response);
   } catch (error) {
     next(error);
   }
