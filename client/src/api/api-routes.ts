@@ -1,5 +1,5 @@
 const API_BASE =
-  import.meta.env.MODE === "development"
+  import.meta.env.MODE === "dev"
     ? `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/api`
     : `${import.meta.env.VITE_PROD_API_URL}/api`;
 
