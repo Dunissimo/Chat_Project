@@ -2,14 +2,26 @@
   @apply select-none px-6 py-2 border border-transparent rounded-md transition-all active:scale-90;
 }
 
-.button-ui.standard {
+.button-ui.standard.light {
   @apply hover:border-white;
 }
 
-.button-ui.outline {
+.button-ui.outline.light {
   @apply outline-none border border-white hover:bg-white hover:text-black;
 }
 
-.button-ui.contained {
+.button-ui.contained.light {
   @apply text-black bg-white hover:text-white hover:bg-transparent border border-white;
+}
+
+.button-ui.standard.dark {
+  @apply hover:border-black;
+}
+
+.button-ui.outline.dark {
+  @apply outline-none border border-black hover:bg-black hover:text-white;
+}
+
+.button-ui.contained.dark {
+  @apply text-white bg-black hover:bg-transparent border border-black hover:text-black;
 }

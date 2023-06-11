@@ -5,7 +5,8 @@ import "./styles.css";
 
 interface IProps extends IBaseProps<HTMLButtonElement> {
   otherProps?: ButtonHTMLAttributes<HTMLButtonElement>;
-  variant?: "standard" | "outline" | "contained";
+  variant?: "standard" | "outline" | "contained" | "simple";
+  theme?: "dark" | "light";
 }
 
 const Button: FC<IProps> = ({
@@ -14,11 +15,12 @@ const Button: FC<IProps> = ({
   style,
   otherProps,
   variant = "standard",
+  theme = "light",
 }) => {
   return (
     <button
       {...otherProps}
-      className={className + " button-ui " + variant}
+      className={className + " button-ui " + variant + " " + theme}
       style={style}
     >
       {children}
