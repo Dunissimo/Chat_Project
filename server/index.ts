@@ -6,9 +6,7 @@ import { Server } from "socket.io";
 import { errorMiddleware } from "./middlewares/error-middleware";
 import { router as authRouter } from "./routes/auth";
 
-process.env.NODE_ENV == "dev"
-  ? dotenv.config({ path: "./configs/dev.env" })
-  : dotenv.config();
+dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
