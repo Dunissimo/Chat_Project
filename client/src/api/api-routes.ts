@@ -1,11 +1,12 @@
 const API_BASE =
   import.meta.env.MODE === "dev"
-    ? `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/api`
-    : `${import.meta.env.VITE_PROD_API_URL}/api`;
+    ? `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}`
+    : `${import.meta.env.VITE_PROD_API_URL}`;
 
 console.log(API_BASE);
 
 export const apiRoutes = {
-  registerUser: API_BASE + "/auth/register/",
-  loginUser: API_BASE + "/auth/login/",
+  base: API_BASE,
+  registerUser: API_BASE + "/api/auth/register/",
+  loginUser: API_BASE + "/api/auth/login/",
 };

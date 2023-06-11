@@ -1,7 +1,8 @@
 import { FC, useEffect } from "react";
 import { io } from "socket.io-client";
+import { apiRoutes } from "../api/api-routes";
 
-const socket = io("http://212.32.205.194:1234");
+const socket = io(apiRoutes.base);
 
 const Main: FC = () => {
   useEffect(() => {
