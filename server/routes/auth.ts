@@ -6,6 +6,8 @@ const authController = new AuthController();
 
 router.post("/auth/register/", async (req, res, next) => {
   try {
+    console.log(req.body);
+
     const response = await authController.register(req.body);
     console.log(response);
 

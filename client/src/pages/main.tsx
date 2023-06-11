@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:1234");
+const socket = io("http://212.32.205.194:1234");
 
 const Main: FC = () => {
   useEffect(() => {
