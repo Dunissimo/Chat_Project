@@ -2,7 +2,6 @@ import { compareSync, genSaltSync, hashSync } from "bcryptjs";
 import { pool as db } from "../db";
 import { QueryConfig } from "pg";
 import { generateJWT } from "../utils/generateJWT";
-import { CustomError } from "../utils/custom-error";
 
 export class AuthService {
   async createUser(dto: any) {

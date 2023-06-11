@@ -1,6 +1,9 @@
 import { Pool } from "pg";
 import dotenv from "dotenv";
-dotenv.config();
+
+process.env.NODE_ENV == "dev"
+  ? dotenv.config({ path: "./configs/dev.env" })
+  : dotenv.config();
 
 console.log({
   user: process.env.PG_USERNAME,

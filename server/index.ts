@@ -1,12 +1,14 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
 import cors from "cors";
+import dotenv from "dotenv";
+import express, { Express, Request, Response } from "express";
 import http from "http";
-import { router as authRouter } from "./routes/auth";
-import { errorMiddleware } from "./middlewares/error-middleware";
 import { Server } from "socket.io";
+import { errorMiddleware } from "./middlewares/error-middleware";
+import { router as authRouter } from "./routes/auth";
 
-dotenv.config();
+process.env.NODE_ENV == "dev"
+  ? dotenv.config({ path: "./configs/dev.env" })
+  : dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
