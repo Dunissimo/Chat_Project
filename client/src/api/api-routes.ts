@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:1234/api";
+const API_BASE = "http://192.168.142.157:1234/api";
 
 export const apiRoutes = {
   registerUser: `${API_BASE}/auth/register/`,

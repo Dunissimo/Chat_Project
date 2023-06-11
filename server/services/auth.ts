@@ -14,7 +14,7 @@ export class AuthService {
 
     const query: QueryConfig = {
       name: "create-user",
-      text: 'INSERT INTO public."User" (name, password, email, role) VALUES($1, $2, $3, $4);',
+      text: 'INSERT INTO public."user" (name, password, email, role) VALUES($1, $2, $3, $4);',
       values: [name, passwordHash, email, role || "user"],
     };
 
@@ -26,7 +26,7 @@ export class AuthService {
   async findUser(name: string) {
     const query: QueryConfig = {
       name: "find-user",
-      text: 'SELECT * FROM public."User" Where name = $1',
+      text: 'SELECT * FROM public."user" Where name = $1',
       values: [name],
     };
 
@@ -38,18 +38,15 @@ export class AuthService {
 
     if (user.rowCount < 1) {
       return false;
-      // throw new CustomError(404, "Пользователь не найден");
     }
 
     const isCorrectPass = compareSync(password, user.rows[0].password);
 
     if (!isCorrectPass) {
       return false;
-      // throw new CustomError(404, "Неправильный пароль");
     }
 
     return true;
-    // return { user: user.rows[0] };
   }
 
   async login(name: string) {
