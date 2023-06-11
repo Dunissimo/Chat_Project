@@ -5,7 +5,7 @@ import "./styles.css";
 
 interface IProps extends IBaseProps<HTMLDivElement> {
   flex?: "row" | "column";
-  justify?: "start" | "center" | "end";
+  justify?: "start" | "center" | "end" | "space-between";
   items?: "start" | "center" | "end";
   gap?: number;
 }
@@ -27,8 +27,8 @@ const Stack: FC<IProps> = ({
       style={{
         display: flex && "flex",
         flexDirection: flex && flex,
-        justifyContent: justify && `justify-${justify}`,
-        alignItems: items && `items-${items}`,
+        justifyContent: justify && justify,
+        alignItems: items && items,
         gap: gap && gap,
         ...style,
       }}
