@@ -49,7 +49,10 @@ export class AuthService {
   }
 
   async login(name: string) {
+    const response = await this.findUser(name);
+
     return {
+      user: response.rows[0],
       access_token: generateJWT(name),
       message: "Пользователь вошел в систему",
     };
