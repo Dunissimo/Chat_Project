@@ -33,3 +33,11 @@ body {
 .login-input {
   @apply text-white;
 }
+
+.drawer-with-custom-title .ant-drawer-header-title {
+  flex-direction: row-reverse;
+}
+.drawer-with-custom-title .ant-drawer-footer {
+  display: flex;
+  flex-direction: row-reverse;
+}

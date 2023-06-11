@@ -10,7 +10,7 @@ import { AxiosError } from "axios";
 interface IProps extends IFormProps {}
 
 // TODO: устранить копирование функционала (две формы), следовать принципу DRY!
-const SignupForm: FC<IProps> = ({ submitHandler, error, mutation }) => {
+const SignupForm: FC<IProps> = ({ submitHandler, isError }) => {
   return (
     <Container maxWidth="lg">
       <form
@@ -20,7 +20,7 @@ const SignupForm: FC<IProps> = ({ submitHandler, error, mutation }) => {
         className="w-1/3 mx-auto flex flex-col gap-4 items-center"
       >
         <Input
-          className={`text-black ${error ? "error" : ""}`}
+          className={`text-black ${isError ? "error" : ""}`}
           otherProps={{
             autoComplete: "off",
             type: "text",
@@ -30,7 +30,7 @@ const SignupForm: FC<IProps> = ({ submitHandler, error, mutation }) => {
           }}
         />
         <Input
-          className={`text-black ${error ? "error" : ""}`}
+          className={`text-black ${isError ? "error" : ""}`}
           otherProps={{
             type: "password",
             name: "password",
@@ -39,7 +39,7 @@ const SignupForm: FC<IProps> = ({ submitHandler, error, mutation }) => {
           }}
         />
         <Input
-          className={`text-black ${error ? "error" : ""}`}
+          className={`text-black ${isError ? "error" : ""}`}
           otherProps={{
             type: "email",
             name: "email",

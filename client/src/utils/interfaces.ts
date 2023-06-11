@@ -32,14 +32,12 @@ export interface IUser {
   role: "user" | "admin";
 }
 
+export interface IAuthResponse {
+  access_token: string;
+  message: string;
+}
+
 export interface IFormProps {
-  setMode: Dispatch<React.SetStateAction<"login" | "signup">>;
   submitHandler: (e: FormEvent<HTMLFormElement>) => void;
-  error: Error | null;
-  mutation: UseMutationResult<
-    AxiosResponse<any, any> | undefined,
-    unknown,
-    registerDto | loginDto,
-    unknown
-  >;
+  isError: boolean;
 }

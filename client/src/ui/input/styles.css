@@ -6,5 +6,5 @@
 }
 
 .input-ui.error {
-  border: 1px solid red;
+  @apply bg-red-500 text-white;
 }

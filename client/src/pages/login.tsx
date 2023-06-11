@@ -1,30 +1,32 @@
-import { FC, FormEvent, FormEventHandler, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import SignupForm from "../components/signup-form";
-import LoginForm from "../components/login-form";
 import { useMutation } from "@tanstack/react-query";
-import { loginDto, registerDto } from "../utils/interfaces";
-import AuthApi from "../api/auth";
-import { setCookie } from "typescript-cookie";
 import { AxiosError } from "axios";
+import { FC, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { setCookie } from "typescript-cookie";
+import AuthApi from "../api/auth";
+import LoginForm from "../components/login-form";
+import SignupForm from "../components/signup-form";
 import { formSubmitHandler } from "../utils/helpers/form-submit";
+import { useAppDispatch } from "../utils/hooks/redux";
+import { loginDto, registerDto } from "../utils/interfaces";
+import { login } from "../redux/slices/user-slice";
 
 const Login: FC = () => {
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [error, setError] = useState<Error | null>(null);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const mutation = useMutation(
     (newUser: loginDto | registerDto) => AuthApi.auth(mode, newUser),
     {
-      onMutate() {
-        setError(null);
-      },
       onSuccess(data) {
         if (mode == "login") {
           if (!data?.data.access_token) return;
 
-          setCookie("user-token", data?.data.access_token, { expires: 1 });
+          dispatch(login(data?.data));
+          setCookie("user-token", data?.data.access_token, { expires: 7 });
+
           navigate("/");
         }
 
@@ -56,37 +58,34 @@ const Login: FC = () => {
 
   const handlers = {
     loginSubmit: (e: FormEvent<HTMLFormElement>) =>
-      formSubmitHandler(e, mutation, error),
+      formSubmitHandler(e, mutation, mutation.isError),
     registerSubmit: (e: FormEvent<HTMLFormElement>) =>
-      formSubmitHandler(e, mutation, error),
+      formSubmitHandler(e, mutation, mutation.isError),
   };
 
   return (
     <div className="login-page min-h-[100vh] pt-20 text-white">
       <h1 className="text-center text-3xl">{text[mode].title}</h1>
       <p className="text-center mt-2 mb-8">{text[mode].subtitle}</p>
-      {error && (
-        <p className="text-red-600 text-center pb-8 font-bold">
-          {error.message}
-        </p>
-      )}
+
+      <div className=" text-center pb-8 font-bold">
+        {mutation.isError && <p className="text-red-600">{error?.message}</p>}
+        {mutation.isLoading && <p>Идет загрузка</p>}
+      </div>
+
       {mode === "login" ? (
         <LoginForm
-          setMode={setMode}
-          error={error}
-          mutation={mutation}
+          isError={mutation.isError}
           submitHandler={handlers.loginSubmit}
         />
       ) : (
         <SignupForm
-          setMode={setMode}
-          error={error}
-          mutation={mutation}
+          isError={mutation.isError}
           submitHandler={handlers.registerSubmit}
         />
       )}
 
-      {mutation.isLoading && <p className="mt-4 text-center">Идет загрузка</p>}
+      <div className="py-4 text-center"></div>
 
       <p className="text-center mt-6 opacity-75">
         {text[mode].par}{" "}

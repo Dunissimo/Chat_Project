@@ -9,7 +9,7 @@ import { IFormProps, loginDto, registerDto } from "../utils/interfaces";
 interface IProps extends IFormProps {}
 
 // TODO: устранить копирование функционала (две формы), следовать принципу DRY!
-const LoginForm: FC<IProps> = ({ submitHandler, error }) => {
+const LoginForm: FC<IProps> = ({ submitHandler, isError }) => {
   return (
     <Container maxWidth="lg">
       <form
@@ -19,7 +19,7 @@ const LoginForm: FC<IProps> = ({ submitHandler, error }) => {
         className="w-1/3 mx-auto flex flex-col gap-4 items-center"
       >
         <Input
-          className={`text-black ${error ? "error" : ""}`}
+          className={`text-black ${isError ? "error" : ""}`}
           otherProps={{
             autoComplete: "off",
             type: "text",
@@ -29,7 +29,7 @@ const LoginForm: FC<IProps> = ({ submitHandler, error }) => {
           }}
         />
         <Input
-          className={`text-black ${error ? "error" : ""}`}
+          className={`text-black ${isError ? "error" : ""}`}
           otherProps={{
             type: "password",
             name: "password",
