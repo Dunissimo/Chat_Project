@@ -92,6 +92,8 @@ const SignupForm: FC<IProps> = ({ setMode }) => {
         </Button>
       </form>
 
+      {mutation.isLoading && <p className="mt-4 text-center">Идет загрузка</p>}
+
       <p className="text-center mt-6 opacity-75">
         Если у вас уже есть аккаунт, то можно{" "}
         <button

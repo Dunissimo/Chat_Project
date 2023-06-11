@@ -42,7 +42,6 @@ const LoginForm: FC<IProps> = ({ setMode }) => {
     };
 
     mutation.mutate(fields as loginDto);
-
     e.currentTarget.reset();
   };
 
@@ -82,6 +81,8 @@ const LoginForm: FC<IProps> = ({ setMode }) => {
           Вход
         </Button>
       </form>
+
+      {mutation.isLoading && <p className="mt-4 text-center">Идет загрузка</p>}
 
       <p className="text-center mt-6 opacity-75">
         Если у вас ещё нет аккаунта, то можно{" "}

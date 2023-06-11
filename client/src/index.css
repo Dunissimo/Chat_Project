@@ -6,8 +6,6 @@ html {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  /* font-family: "Noto Sans", sans-serif; */
-  /* font-family: "Roboto", sans-serif; */
 }
 
 body {
@@ -17,6 +15,7 @@ body {
   font-family: "Montserrat Alternates", sans-serif;
 }
 
+.main-page,
 .login-page {
   background: #396afc; /* fallback for old browsers */
   background: -webkit-linear-gradient(
