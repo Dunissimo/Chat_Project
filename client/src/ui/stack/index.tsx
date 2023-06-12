@@ -7,7 +7,7 @@ interface IProps extends IBaseProps<HTMLDivElement> {
   flex?: "row" | "column";
   justify?: "start" | "center" | "end" | "space-between";
   items?: "start" | "center" | "end";
-  gap?: number;
+  gap?: string | number;
 }
 
 const Stack: FC<IProps> = ({

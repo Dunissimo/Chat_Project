@@ -20,7 +20,7 @@ const Button: FC<IProps> = ({
   return (
     <button
       {...otherProps}
-      className={className + " button-ui " + variant + " " + theme}
+      className={"button-ui " + variant + " " + theme + " " + className}
       style={style}
     >
       {children}

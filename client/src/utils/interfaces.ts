@@ -25,7 +25,7 @@ export interface registerDto {
 export type loginDto = Pick<registerDto, "name" | "password">;
 
 export interface IUser {
-  id: number;
+  user_id: number;
   name: string;
   password: string;
   email: string;
