@@ -3,8 +3,6 @@ import { apiRoutes } from "./api-routes";
 
 class UsersApi {
   async getUser(id: number) {
-    console.log(id);
-    
     return axios.get(`${apiRoutes.users}${id}`);
   }
 

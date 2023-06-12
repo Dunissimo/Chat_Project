@@ -25,9 +25,6 @@ const Login: FC = () => {
           if (!data?.data.access_token) return;
 
           dispatch(login(data?.data));
-          // setCookie("user-token", data?.data.access_token, { expires: 7 });
-          // setCookie("user", JSON.stringify(data?.data.user), { expires: 7 });
-
           navigate("/");
         }
 
