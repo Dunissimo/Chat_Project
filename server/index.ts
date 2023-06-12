@@ -5,6 +5,7 @@ import http from "http";
 import { Server } from "socket.io";
 import { errorMiddleware } from "./middlewares/error-middleware";
 import { router as authRouter } from "./routes/auth";
+import { router as userRouter } from "./routes/users";
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ const port = process.env.PORT;
 // Middlewares
 app.use(cors({ origin: "*" }));
 app.use(express.json());
-app.use("/api", authRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 app.use(errorMiddleware);
 
 const server = http.createServer(app);

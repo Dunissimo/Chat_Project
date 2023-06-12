@@ -9,4 +9,5 @@ export const apiRoutes = {
   base: API_BASE,
   registerUser: API_BASE + "/api/auth/register/",
   loginUser: API_BASE + "/api/auth/login/",
+  users: API_BASE + "/api/users/",
 };

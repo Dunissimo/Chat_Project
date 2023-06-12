@@ -8,3 +8,7 @@
 .input-ui.error {
   @apply bg-red-500 text-white;
 }
+
+.input-ui.disabled {
+  @apply bg-gray-200;
+}
