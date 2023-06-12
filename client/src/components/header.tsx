@@ -35,18 +35,18 @@ const Header: FC = () => {
 
   return (
     <header className="header min-w-full bg-white text-black">
-      <Container maxWidth="xl">
+      <Container>
         <Stack
           flex="row"
           items="center"
           justify="space-between"
-          className="min-h-[50px]"
+          className="min-h-[55px]"
         >
           <h1 className="font-bold text-2xl">Chat</h1>
 
           {/* Drawer Trigger */}
           <Button
-            variant="simple"
+            variant="standard"
             theme="dark"
             otherProps={{ onClick: showDrawer }}
           >
