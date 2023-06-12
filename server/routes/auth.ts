@@ -4,7 +4,7 @@ import { AuthController } from "../controllers/auth";
 export const router = express.Router();
 const authController = new AuthController();
 
-router.post("/auth/register/", async (req, res, next) => {
+router.post("/register/", async (req, res, next) => {
   try {
     console.log(req.body);
 
@@ -17,7 +17,7 @@ router.post("/auth/register/", async (req, res, next) => {
   }
 });
 
-router.post("/auth/login/", async (req, res, next) => {
+router.post("/login/", async (req, res, next) => {
   try {
     const response = await authController.login(req.body);
 
